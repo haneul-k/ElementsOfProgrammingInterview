@@ -46,6 +46,10 @@ public class PhoneMnemonic6_7 {
         String string = "239";
         List<String> res = phoneMnemonic(string);
         System.out.println(res.toString());
+
+        String string1 = "231";
+        List<String> res1 = phoneMnemonic(string1);
+        System.out.println(res1.toString());
     }
 
 }
