@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-public class ReverseString6_6 {
+public class ReverseWords6_6 {
 
     public static void reverseString(char[] inputStr, int start, int end) {
         while (start < end) {
@@ -12,7 +12,7 @@ public class ReverseString6_6 {
         }
     }
 
-    public static void reverseSentence(char[] inputStr) {
+    public static void reverseWords(char[] inputStr) {
         reverseString(inputStr, 0, inputStr.length - 1);
         List<Integer> spaces = new ArrayList<>();
         for (int i = 0; i < inputStr.length; i++) {
@@ -33,7 +33,7 @@ public class ReverseString6_6 {
     public static void main(String[] args) {
         String inputStr = "Bob likes Alice";
         char[] charArray = inputStr.toCharArray();
-        reverseSentence(charArray);
+        reverseWords(charArray);
         System.out.println(String.copyValueOf(charArray));
     }
 }
