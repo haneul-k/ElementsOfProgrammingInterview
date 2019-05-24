@@ -5,28 +5,25 @@ public class ReverseSublist7_2 {
     //         11->7->5->3->2
 
     public static ListNode<Integer> reverseSublist(ListNode<Integer> list, int start, int end) {
-        int i = 1;
-        ListNode<Integer> dummyhead = new ListNode<>(0);
-        dummyhead.next = list;
-        ListNode<Integer> currNode = dummyhead;
+        ListNode<Integer> dummyHead = new ListNode<>(0);
+        dummyHead.next = list;
+        ListNode<Integer> currNode = dummyHead;
 
-        while (i < start) {
+        for (int i = 1; i < start; i++) {
             currNode = currNode.next;
-            i++;
         }
 
-        ListNode<Integer> listHead = currNode;
-        ListNode<Integer> temp;
-        ListNode<Integer> listIterator = currNode.next;
-        while (start < end) {
-            temp = listIterator.next;
-            listIterator.next = temp.next;
-            temp.next = listHead.next;
-            listHead.next = temp;
-            start++;
+        ListNode<Integer> baseNode = currNode;
+        currNode = currNode.next; //currNode is now the "start" node
+        while (start++ < end) {
+            ListNode<Integer> startNode = currNode.next;
+            ListNode<Integer> endNode = currNode.next.next;
+            currNode.next.next = baseNode.next;
+            baseNode.next = startNode;
+            currNode.next = endNode;
         }
 
-        return dummyhead.next;
+        return dummyHead.next;
     }
 
     public static void main(String[] args) {

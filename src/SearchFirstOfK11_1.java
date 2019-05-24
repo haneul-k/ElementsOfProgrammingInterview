@@ -8,7 +8,7 @@ public class SearchFirstOfK11_1 {
         int end = list.size() - 1;
 
         while (start <= end) {
-            int mid = end - (end - start) / 2; //to prevent overflow
+            int mid = start + (end - start) / 2; //to prevent overflow
             if (list.get(mid) == val) {
                 if (mid == 0 || list.get(mid-1) != val) { //is the leftmost value that is equal to val
                     return mid;
