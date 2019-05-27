@@ -4,24 +4,23 @@ public class OnlineMedian10_5 {
 
     public static List<Double> onlineMedian(Iterator<Integer> iterator) {
         final int INITIAL_CAPACITY = 16;
-        PriorityQueue<Integer> lowerHalf = new PriorityQueue<>(INITIAL_CAPACITY, Collections.reverseOrder()); //this is maxheap
-        PriorityQueue<Integer> upperHalf = new PriorityQueue<>(INITIAL_CAPACITY); //this is minheap
+        PriorityQueue<Integer> lowerHalf = new PriorityQueue<>(INITIAL_CAPACITY, Collections.reverseOrder());
+        PriorityQueue<Integer> upperHalf = new PriorityQueue<>(INITIAL_CAPACITY);
         List<Double> medians = new ArrayList<>();
 
+        //first insert to upperhalf, then mvoe to lower half if necessary
         while (iterator.hasNext()) {
-            Integer val = iterator.next();
-            if (!upperHalf.isEmpty() && upperHalf.peek() < val) {
-                upperHalf.add(val);
-            } else {
-                lowerHalf.add(val);
+            upperHalf.add(iterator.next());
+            if (upperHalf.size() - 1 > lowerHalf.size()) { //up to one element more in the upper half
+                lowerHalf.add(upperHalf.poll()); //move the min to the lower half
             }
 
-            if (lowerHalf.size() - upperHalf.size() > 1) { //lowerhalf and upperhalf not equally divided
-                upperHalf.add(lowerHalf.poll());
-            } else if (upperHalf.size() > lowerHalf.size()) {
-                lowerHalf.add(upperHalf.poll());
+            double median = 0;
+            if (upperHalf.size() == lowerHalf.size()) { //even number of elements, so median is the average of two elements
+                median = ((double) upperHalf.peek() + (double) lowerHalf.peek()) / 2.0;
+            } else {
+                median = upperHalf.peek();
             }
-            double median = (lowerHalf.size() > upperHalf.size() ? (double)lowerHalf.peek() : (double)((upperHalf.peek() + lowerHalf.peek())) / 2);
             medians.add(median);
         }
 
@@ -33,6 +32,4 @@ public class OnlineMedian10_5 {
         List<Integer> list = Arrays.asList(array);
         System.out.println(onlineMedian(list.iterator()));
     }
-
-
 }

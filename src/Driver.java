@@ -1,21 +1,21 @@
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class Driver {
     public static void main(String[] args) {
-        Queue8_8 queue = new Queue8_8();
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(3, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
 
-        queue.enqueue(1);
-        queue.enqueue(2);
-        queue.enqueue(3);
-        queue.enqueue(4);
-        queue.enqueue(5);
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        queue.enqueue(6);
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
+        //add first vals to the priority queue
+        priorityQueue.add(1);
+        priorityQueue.add(2);
+        priorityQueue.add(3);
 
+        System.out.println(priorityQueue.poll());
     }
 }
